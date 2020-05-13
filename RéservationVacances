@@ -1,124 +1,79 @@
 <!DOCTYPE html>
 <html>
+<?php
+$connexion=mysqli_connect('localhost','root','','resa');
+$connexion->set_charset("utf8");
+session_start();
+echo 'Bonjour '.$_SESSION['pseudo'];
+?>
 <head>
-	<title>Réserver un hébergement</title>
+	<title>VVA</title>
+	 <link rel="stylesheet" href="bootstrap-4.4.0-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="styleAccueil.css">
+    <script src="bootstrap-4.4.0-dist/js/bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="icon" href="logovva.ico"/>
+
 </head>
-<body>
-	
-	<!--<form action="traitementmodifierHebergements2.php" method="POST">-->
-<p>Photo hébergement</p>
-	<?php
-		$connexion=mysqli_connect('localhost','root','','resa');
-		session_start();
-		echo 'Bonjour '.$_SESSION['pseudo'];
+<body class="bckg" background="accueil6.jpg" href="ExempleAccueil.html">
+	<div class="titre1"><p class="titre" style="color:dark">Village Vacances Alpes<span style="color: grey">.</span></p></div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
 
-		//if(isset($_POST['continuer'])){
-
-
-		$id=$_GET['page'];
-		$noresa=$_POST['noresa'];
-		//$user=$_POST['user'];
-		//$noheb$_POST['noheb'];
-		$datedebutsem=$_POST['datedebutsem'];
-		$datefinsem=$_POST['datefinsem'];
-		$codeetatresa=$_POST['codeetatresa'];
-		$nbplaceheb=$_POST['nbplaceheb'];
-		$surfaceheb=$_POST['surfaceheb'];
-		$montantarrhes=$_POST['montantarrhes'];
-		$nboccupant=$_POST['nboccupant'];
-		$tarifsemheb=$_POST['tarifsemheb'];
-
-
-
-		if(!empty($datedebutsem)){
- 	echo'erreur ! veuillez remplir entièrement le formulaire';
- 	//header('Location:refusReservation.php');
- 							}
-
- 	
- 	
-
- 	 
-
- 	 if(!empty($datefinsem)){
- 	echo"erreur ! veuillez remplir entièrement le formulaire";
- 	//header('Location:refusReservation.php');
- 							}
-
- 	
-
- 	 if(!empty($codeetatresa)){
- 	echo"erreur ! veuillez remplir entièrement le formulaire";
- 	//header('Location:refusReservation.php');
- 							}
-
- 	
-
- 	 if(!empty($nbplaceheb)){
- 	echo"erreur ! veuillez remplir entièrement le formulaire";
- 	//header('Location:refusReservation.php');
- 							}
-
- 	
-
- 	 if(!empty($surfaceheb)){
- 	echo"erreur ! veuillez remplir entièrement le formulaire";
- 	//header('Location:refusReservation.php');
- 							}
-
- 
-
- 	 if(!empty($montantarrhes)){
- 	echo"erreur ! veuillez remplir entièrement le formulaire";
- 	//header('Location:refusReservation.php');
- 								}
-
- 	
-
- 	 if(!empty($nboccupant)){
- 	echo"erreur ! veuillez remplir entièrement le formulaire";
- 	//header('Location:refusReservation.php');
- 							}
-
- 	
-
- 	 if(!empty($tarifsemheb)){
- 	 echo"erreur ! veuillez remplir entièrement le formulaire";
- 	//header('Location:refusReservation.php');
- 							}
-
- 	
-
-
- 	echo"bjr 2 ";
-	$requete2="INSERT INTO RESA VALUES(".$noresa.",'".$_SESSION['pseudo']."','".$datedebutsem."',".$id.",'".$codetyperesa"','".$dateresa."','".$datearrhes."',".$montantarrhes.",".$nboccupant.",".$tarifsemheb.")";
-	echo $requete2;
-	$resultat2 = mysqli_query($connexion,$requete2);
-	$ligne2 = mysqli_fetch_assoc($resultat2);
-	 
-	// echo "<form method='POST' action='traitementModifierHebergements2.php?page=".$id."'>";
-	 
-
- 	header('Location:succesReservation.php');
- 	
-
-
-//}
- 
-
-//echo "<form method='POST' action='traitementModifierHebergements2.php?page=".$id."'>";
-
+  <a class="navbar-brand" href="MenuPrincipal.html"><img src="logo.png "></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="connexion.php">Connexion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="consulterHebergements.php">Consulter les h&eacute;bergements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="modifierHebergements.php">Modifier les h&eacute;bergements</a>
+      </li>
       
-//echo"<button type='submit' name='modif' class='btn btn-primary' >Sauvegarder</button>";
+        <!-- bloc menu déroulant -->
+  
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<?php
+
+$connexion=mysqli_connect('localhost','root','','resa');
+		
+		if(isset($_POST['modif'])){
+      $id=$_GET['page'];
+      $nomhebergement=$_POST['nomheb'];
+      $nohebergement=$_POST['noheb'];
+      $etatheb=$_POST['etatheb'];
+
+			$requete = "UPDATE HEBERGEMENT SET NOMHEB='".$nomhebergement."', ETATHEB='".$etatheb."' WHERE NOHEB=".$id;
+
+			echo $requete;
+			$resultat = mysqli_query($connexion,$requete);
+      $ligne = mysqli_fetch_assoc($resultat);
+				
+		//while ($ligne = mysqli_fetch_assoc($resultat)) {
+		//echo "Voici les modifications effectuées : ";//."$ligne['NOHEB']"
+
+		
+		//}
+		}
+
+    header('Location:succesModif.php');
+    
+  
+		?>
 
 
-      //echo "<button name='modif'><a href='traitementModifierHebergements2.php?page=".$id."'>Modifier</a></button>";
-      //echo"</form>";
-
-	 
-
-      ?>
+</body>
+</html>
       
 
 </body>

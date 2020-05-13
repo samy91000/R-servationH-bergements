@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Réserver un hébergement</title>
+</head>
+<body>
+	
+	<!--<form action="traitementmodifierHebergements2.php" method="POST">-->
+<p>Photo hébergement</p>
+	<?php
+		$connexion=mysqli_connect('localhost','root','','resa');
+		session_start();
+		echo 'Bonjour '.$_SESSION['pseudo'];
+
+
+		//if(isset($_POST['continuer'])){
+
+
+		$id=$_GET['page'];
+		$noresa=$_POST['noresa'];
+		//$user=$_POST['user'];
+		//$noheb$_POST['noheb'];
+		$datedebutsem=$_POST['datedebutsem'];
+		$datefinsem=$_POST['datefinsem'];
+		$codeetatresa=$_POST['codeetatresa'];
+		$nbplaceheb=$_POST['nbplaceheb'];
+		$surfaceheb=$_POST['surfaceheb'];
+		$montantarrhes=$_POST['montantarrhes'];
+		$nboccupant=$_POST['nboccupant'];
+		$tarifsemheb=$_POST['tarifsemheb'];
+
+
+
+		if(!empty($datedebutsem)){
+ 	echo'erreur ! veuillez remplir entièrement le formulaire';
+ 	//header('Location:refusReservation.php');
+ 							}
+
+ 	
+ 	
+
+ 	 
+
+ 	 if(!empty($datefinsem)){
+ 	echo"erreur ! veuillez remplir entièrement le formulaire";
+ 	//header('Location:refusReservation.php');
+ 							}
+
+ 	
+
+ 	 if(!empty($codeetatresa)){
+ 	echo"erreur ! veuillez remplir entièrement le formulaire";
+ 	//header('Location:refusReservation.php');
+ 							}
+
+ 	
+
+ 	 if(!empty($nbplaceheb)){
+ 	echo"erreur ! veuillez remplir entièrement le formulaire";
+ 	//header('Location:refusReservation.php');
+ 							}
+
+ 	
+
+ 	 if(!empty($surfaceheb)){
+ 	echo"erreur ! veuillez remplir entièrement le formulaire";
+ 	//header('Location:refusReservation.php');
+ 							}
+
+ 
+
+ 	 if(!empty($montantarrhes)){
+ 	echo"erreur ! veuillez remplir entièrement le formulaire";
+ 	//header('Location:refusReservation.php');
+ 								}
+
+ 	
+
+ 	 if(!empty($nboccupant)){
+ 	echo"erreur ! veuillez remplir entièrement le formulaire";
+ 	//header('Location:refusReservation.php');
+ 							}
+
+ 	
+
+ 	 if(!empty($tarifsemheb)){
+ 	 echo"erreur ! veuillez remplir entièrement le formulaire";
+ 	//header('Location:refusReservation.php');
+ 							}
+
+ 	
+
+
+ 	echo"bjr 2 ";
+	$requete2="INSERT INTO RESA VALUES(".$noresa.",'".$_SESSION['pseudo']."','".$datedebutsem."',".$id.",'".$codetyperesa"','".$dateresa."','".$datearrhes."',".$montantarrhes.",".$nboccupant.",".$tarifsemheb.")";
+	echo $requete2;
+	$resultat2 = mysqli_query($connexion,$requete2);
+	$ligne2 = mysqli_fetch_assoc($resultat2);
+	 
+	// echo "<form method='POST' action='traitementModifierHebergements2.php?page=".$id."'>";
+	 
+
+ 	header('Location:succesReservation.php');
+ 	
+
+
+//}
+ 
+
+//echo "<form method='POST' action='traitementModifierHebergements2.php?page=".$id."'>";
+
+      
+//echo"<button type='submit' name='modif' class='btn btn-primary' >Sauvegarder</button>";
+
+
+      //echo "<button name='modif'><a href='traitementModifierHebergements2.php?page=".$id."'>Modifier</a></button>";
+      //echo"</form>";
+
+	 
+
+      ?>
+      
+
+</body>
+</html>
